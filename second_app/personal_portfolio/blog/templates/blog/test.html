@@ -1,0 +1,12 @@
+{% extends 'skill/base.html' %}
+{% load static %}
+{% block content %}
+<h1>Блог</h1>
+
+{% for blog in test %}
+
+        <h5>{{blog}}</h5>
+        <p>{{blog}}</p>
+
+{% endfor %}
+{% endblock %}

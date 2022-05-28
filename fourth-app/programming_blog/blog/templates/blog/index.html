@@ -1,11 +1,21 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+{% load static %}
 <h1> {{ title }} </h1>
 <ul>
     {% for p in posts %}
     <li>
-        <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
-        <p>{{ p.content|linebreaks|truncatewords:50 }}</p>
+        <p class="first">категория: {{p.cat}}</p>
+        <div class="text">
+            {% if p.photo %}
+            <img class="image" src="{{p.photo.url}}" alt="">
+            {% else %}
+            <img class="image" src="{% static 'blog/default.jpeg' %}" alt="">
+            {% endif %}
+            <h2><a href="{{ p.get_absolute_url }}">{{ p.title }}</a></h2>
+            <p>{{ p.content|linebreaks|truncatewords:50 }}</p>
+        </div>
+        <p class="date">Дата:{{p.time_created}}</p>
     </li>
     {% endfor %}
 </ul>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<div class="menu">
+    <div class="wrap">
+        <div class="logo">
+            <a href="{% url 'index'%}"><img src="{% static 'images/logo.png'%}" alt=""></a>
+            <li><a href="{% url 'create_user' %}">Регистрация</a></li>
+            <li><a href="{% url 'loginuser' %}">Авторизация</a></li>
+        </div>
+        <ul>
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'blog:bl' %}">Блог</a></li>
+            <li><a href="{% static 'image/resume.pdf'%}" target="_blank">Резюме</a></li>
+        </ul>
+    </div>
+    <div class="user">
+        {% if user.is_authenticated %}
+        <p>пользователь:{{user.username}}</p>
+        <form action="{% url 'logoutuser' %}" method="post">
+            {% csrf_token %}
+            <button class="but"> Выйти</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<body>
+    <div class="content">
+        <div class="wrap">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
