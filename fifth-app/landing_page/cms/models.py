@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class CmsSlider(models.Model):
     cms_img = models.ImageField(upload_to='slider_img/')
     cms_title = models.CharField(max_length=200, verbose_name='Заголовок')
