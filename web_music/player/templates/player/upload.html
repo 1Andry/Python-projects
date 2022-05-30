@@ -1,0 +1,10 @@
+
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ song.as_p }}
+    <div class="form-error">{{ form.non_field_error }}</div>
+    <button type="submit">Upload</button>
+    <h1>не расширяет upload.html</h1>
+</form>
