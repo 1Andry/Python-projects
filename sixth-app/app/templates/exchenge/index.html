@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="form-wrap">
+        <h3>Конвертор валют</h3>
+        <div class="content">
+            <form action="" method="post">
+                {% csrf_token%}
+                <div class="form">
+                    <input type="number" name="from-amount" placeholder="Сумма" class="form-control">
+                    <select name="from-curr" class="form-control" value="{{ form_curr }}">
+                        {% for curr in currencies %}
+                        <option value="{{curr}}">{{curr}}</option>
+                        {% endfor %}
+                    </select>
+                    <select name="to-curr" class="form-control" value="{{ to_curr }}">
+                        {% for curr in currencies %}
+                        <option value="{{curr}}">{{curr}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="submit-btn">
+                    <button> Рассчитать</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -24,3 +24,14 @@ class Order(models.Model):  # Заказы
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+
+class CommentsCrm(models.Model):
+    comment_binding = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заявка')
+    comment_text = models.TextField(verbose_name='комментарий')
+    comment_dt = models.DateTimeField(auto_now=True, verbose_name='дата создания')
+
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'

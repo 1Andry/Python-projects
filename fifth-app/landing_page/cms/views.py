@@ -3,6 +3,7 @@ from .models import CmsSlider
 from price.models import PriceCard, PriceTable
 from crm.models import Order
 from crm.forms import OrderForm
+from telebot.sendmessege import send_telegram
 
 
 def first_page(request):
@@ -21,3 +22,16 @@ def first_page(request):
         'form': form,
     }
     return render(request, 'cms/index.html', dict_obj)
+
+
+def thanks_page(request):
+    if request.POST:
+        name = request.POST['name']
+        phone = request.POST['phone']
+        element = Order(order_name=name, order_phone=phone)
+        element.save()
+        send_telegram(tg_name=name, tg_phone=phone)
+        return render(request, 'cms/thanks.html', {'name': name})
+    else:
+        return render(request, 'сms/thanks.html')
+

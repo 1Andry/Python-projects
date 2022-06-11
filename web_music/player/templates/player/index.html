@@ -1,0 +1,14 @@
+{% extends 'player/base.html' %}
+{% block content %}
+{% for s in songs %}
+        <div class="sound-wrapper">
+            <p class="sound">{{s}}</p>
+            <div class="option">
+                <input class="checkbox" type="checkbox">
+                <a href="media/{{s}}" download="">
+                <img src="static/download-2.svg" alt=""></a>
+            </div>
+        </div>
+        {% endfor %}
+
+{% endblock %}

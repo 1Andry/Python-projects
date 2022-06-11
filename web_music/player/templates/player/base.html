@@ -4,58 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 <div class="header">
     <div class="wrapper">
-
         <ul class="mainmenu">
             <li><a href="{% url 'base' %}">logo</a>
-                {% if request.user.is_authenticated %}
-            <li><a href="#">{{user.username}}</a>|<a href="{% url 'logout' %}">Выйти</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}">{{user.username}}</a>|<a href="{% url 'logout' %}">Выйти</a></li>
             {% else %}
             <li><a href="{% url 'register' %}">Реристрация</a>|<a href="{% url 'login' %}">Войти</a></li>
             {% endif %}
         </ul>
     </div>
-
 </div>
-{% block content %}
 <div class="body">
     <div class="body-wrapper">
-        {% if request.user.is_authenticated %}
-        {% include 'player/upload.html' %}
-
-        {% else %}
-        <div>
-            <h2>Пройти регистрацию</h2>
-            <form action="{% url 'register' %}" class="center">
-                <button class="btn"> Начать</button>
-            </form>
+        {% block content %}
+        {% endblock %}
+        {% for s in songs %}
+        <div class="sound-wrapper">
+            <p class="sound">{{s}}</p>
+            <div class="option">
+                <input class="checkbox" type="checkbox">
+                <a href="media/{{s}}" download="">
+                <img src="static/download-2.svg" alt=""></a>
+            </div>
         </div>
-        {% endif %}
-    </div>
-    <div>
-        {% include 'player/ss.html' %}
-    </div>
-    <div class="player-container">
-        <div class="progress-bar"></div>
-        <div class="buttons">
-            <div class="prev"><img src="static/prev.png" alt=""></div>
-            <div class="play"><img src="static/play.png" alt=""></div>
-            <div class="pause"><img src="static/pause.png" alt=""></div>
-            <div class="next"><img src="static/next.png" alt=""></div>
-        </div>
+        {% endfor %}
+        <audio class="audio" controls hidden src=""></audio>
     </div>
 </div>
-{% endblock %}
 <div class="footer">
     <div class="wrapper">
-
+        <div class="player-container">
+            <div class="name-song">nan</div>
+            <div class="progress-bar"></div>
+            <div class="buttons">
+                <div class="prev"><img src="static/prev.png" alt=""></div>
+                <div class="play"><img src="static/play.png" alt=""></div>
+                <div class="pause"><img src="static/pause.png" alt=""></div>
+                <div class="next"><img src="static/next.png" alt=""></div>
+            </div>
+        </div>
     </div>
 </div>
-</body>
 <script src="static/script.js"></script>
+</body>
+
 </html>

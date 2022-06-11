@@ -1,30 +1,40 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 
 
-class AddSong(models.Model):
-    song = models.FileField(upload_to='uploads/songs')
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=255, blank=True)
+    password = models.CharField(max_length=50, blank=True)
+    time_created = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(null=True, blank=True, upload_to="images/")
+
+    def __str__(self):
+        return self.email
 
     class Meta:
-        verbose_name = 'Песни'
-        verbose_name_plural = 'Песни'
-# class Profile(models.Model):
-#     # user = models.CharField(max_length=255)
-#     email = models.EmailField(max_length=255)
-#     password1 = models.CharField(max_length=50)
-#     password2 = models.CharField(max_length=50)
-#     time_created = models.DateTimeField(auto_now=True)
-#     song = models.FileField(upload_to='uploads/songs', blank=True)
-#     photo = models.ImageField(null=True, blank=True, upload_to="images/")
-#
-#     def __str__(self):
-#         return self.email
-#
-#     class Meta:
-#         verbose_name = 'Профиль'
-#         verbose_name_plural = 'Профиль'
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профиль'
 
 
-# class Test(models.Model):
-#     password1 = models.CharField(max_length=50)
-#     password2 = models.CharField(max_length=50)
+class Songs(models.Model):
+    song = models.FileField(upload_to='uploads/songs', blank=True, validators=[
+        FileExtensionValidator(allowed_extensions=['mp3'], message='только mp3 формат')])
+    user = models.ForeignKey(User, blank=True, default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.song)
+
+    class Meta:
+        verbose_name = 'песни'
+        verbose_name_plural = 'песни'
+
+
+class UserList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    play_list = models.CharField(max_length=115, blank=True, verbose_name='play list')
+    songs_link = models.CharField(max_length=115, blank=True, verbose_name='songs_link')
+
+    def __str__(self):
+        return str(self.user)

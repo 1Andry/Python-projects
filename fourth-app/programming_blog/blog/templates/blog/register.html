@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+<div class="register">
 <h1>{{ title}}</h1>
 <form method="post">
     {% csrf_token %}
@@ -7,5 +8,5 @@
     <button>Регистрация</button>
 
 </form>
-
+</div>
 {% endblock %}

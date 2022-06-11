@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from .models import AddSong
+from .models import Songs, UserList
 
 
 class RegisterUserForm(UserCreationForm):
@@ -14,25 +14,17 @@ class RegisterUserForm(UserCreationForm):
 
 
 class UploadFileForm(forms.ModelForm):
+
     class Meta:
-        model = AddSong
-        fields = ('song',)
+        model = Songs
+        fields = ('song', 'user')
 
 
-# class DocumentForm(forms.ModelForm):
-#     class Meta:
-#         model = Document
-#         fields = ('description', 'document', )
+class PlayListForm(forms.ModelForm):
 
-# class Content(forms.Form):
-#     # user = forms.OneToOneField(User, on_delete=models.CASCADE)
-#     # song = forms.FileField(upload_to='uploads/songs', blank=True)
-#     photo = forms.ImageField(blank=True, upload_to="images/")
-
-
-# time_created = forms.DateTimeField(auto_now=True)
-# song = forms.FileField(upload_to='uploads/songs', blank=True)
-# photo = forms.ImageField(null=True, blank=True, upload_to="images/")
+    class Meta:
+        model = UserList
+        fields = ('user', 'play_list', 'songs_link')
 
 #
 #

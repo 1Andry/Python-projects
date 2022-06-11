@@ -1,22 +1,49 @@
 let butPlay = document.querySelector('.play')
-let butPause = document.getElementById('pause')
+let butPause = document.querySelector('.pause')
 let butNext = document.querySelector('.next')
+let butPrev = document.querySelector('.prev')
 let audio = document.querySelector('.audio')
-let sounds = document.getElementsByClassName('sound')
-let i = 0
+let namesong = document.querySelector('.name-song')
+let songs = document.getElementsByClassName('sound');
+let index = 0
+
+// function shortName(){
+//     return songs.innerHTML = songs.replace('uploads/', '')
+// }
+// shortName()
+
+function newName(){
+    return document.getElementsByClassName('sound').innerText = 'newText'
+    console.log('+++')
+}
+newName()
+
+function loadSong(index=0){
+    audio.src = `media/${songs[index].innerHTML}`
+    path = (songs[index].innerHTML).split('/')
+    path = path[path.length -1] 
+    namesong.innerHTML = path
+}
+loadSong()
+
+
+
+
 butPlay.onclick = function(){
     document.querySelector('audio').play()
-    console.log('play')
 }
 butPause.onclick = function(){
     document.querySelector('audio').pause()
 }
 butNext.onclick = function(){
-    // audio.src = sounds[0+i]
-    console.log(sounds[0]+=1)
-    // console.log(`i= ${i}`)
+    loadSong(index++)
+    document.querySelector('audio').play()
 }
-let songIndex = 0
+butPrev.onclick = function(){
+    loadSong(index--)
+    document.querySelector('audio').play()
+}
+
 
 
 
@@ -32,11 +59,6 @@ let songIndex = 0
 
 // let player = document.getElementById('current_song')
 // console.log(player)
-
-
-
-// let audio = document.querySelector('.audio')
-// console.log(audio)
 
 // function loadSong(song){
 //     audio.src = song
